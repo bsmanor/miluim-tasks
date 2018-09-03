@@ -19,6 +19,7 @@ export class SoldiersService {
 
 
   getSoldiers() {
+    // next step is to create the get soldiers as an obserable instead of a function
     return this.soldiers;
   }
 
