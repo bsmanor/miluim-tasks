@@ -1,6 +1,16 @@
 
-  <mat-form-field appearance="outline">
-    <input matInput placeholder="Placeholder">
-  </mat-form-field>
+<mat-form-field appearance="outline">
+  <input matInput placeholder="first name" [(ngModel)]="firstName">
+</mat-form-field>
+<mat-form-field appearance="outline">
+  <input matInput placeholder="last name" [(ngModel)]="lastName">
+</mat-form-field>
+
+<button mat-button color="primary" (click)="createSoldier()">ADD SOLDIER</button>
+
+<ul *ngIf="soldiers">
+  <li *ngFor="let soldier of soldiers | async">{{soldier.firstName}} - {{soldier.lastName}}</li>
+</ul>
+
 
 <router-outlet></router-outlet>

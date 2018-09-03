@@ -1,3 +1,4 @@
+import { SoldiersService } from '../assets/services/soldiers.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'miluim';
+
+  firstName: string;
+  lastName: string;
+  soldiers: any;
+
+  constructor(private soldiersService: SoldiersService) {
+    this.soldiers = this.soldiersService.getSoldiers();
+  }
+
+  createSoldier() {
+    this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName});
+  }
+
 }
