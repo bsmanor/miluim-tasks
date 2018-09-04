@@ -10,11 +10,15 @@ import { Soldier } from './../models/models';
 export class SoldiersService {
 
   private soldiersCollection: AngularFirestoreCollection<Soldier>;
-  soldiers: Observable<Soldier[]>;
+  _soldiers: Observable<Soldier[]>;
+
+  get soldiers(): Observable<Soldier[]> {
+    return this._soldiers;
+  }   
 
   constructor(private afs: AngularFirestore) {
     this.soldiersCollection = afs.collection<Soldier>('soldiers');
-    this.soldiers = this.soldiersCollection.valueChanges();
+    this._soldiers = this.soldiersCollection.valueChanges();
   }
 
 
@@ -24,11 +28,14 @@ export class SoldiersService {
   }
 
   getSoldierById(id) {
-    return this.soldiersCollection.doc(id).valueChanges();
+    this.soldiersCollection.doc(id).valueChanges().subscribe(snap => {
+      return snap;
+    }).unsubscribe();
+
   }
 
   createSoldier(soldier: Soldier) {
-    this.soldiersCollection.add(soldier);
+    this.soldiersCollection.doc(soldier.id).set(soldier);
   }
 
   updateSoldier(id, param, value) {

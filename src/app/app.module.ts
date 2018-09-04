@@ -8,13 +8,16 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
-import { ComponentsModule } from './components.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AppRoutingModule,
     MaterialModule,
-    ComponentsModule,
     BrowserAnimationsModule
   ],
   providers: [],

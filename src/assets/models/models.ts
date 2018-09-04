@@ -1,6 +1,5 @@
 export interface Soldier {
     id?: string;
-    pesonalNumber?: string;
     firstName?: string;
     lastName?: string;
     age?: string;

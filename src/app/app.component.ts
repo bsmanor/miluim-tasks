@@ -1,5 +1,7 @@
 import { SoldiersService } from '../assets/services/soldiers.service';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Soldier } from '../assets/models/models';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +12,24 @@ export class AppComponent {
 
   firstName: string;
   lastName: string;
-  soldiers: any;
+  id: string;
+  soldiers: Observable<Soldier[]>
 
   constructor(private soldiersService: SoldiersService) {
-    this.soldiers = this.soldiersService.getSoldiers();
+    this.soldiers = soldiersService.soldiers;
   }
 
   createSoldier() {
-    this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName});
+    this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName, id: this.id});
   }
+
+  getSoldier(id) {
+    this.soldiersService.getSoldierById(id)
+  }
+
+  deleteSoldier(id) {
+    this.soldiersService.deleteSoldier(id);
+  }
+
 
 }
