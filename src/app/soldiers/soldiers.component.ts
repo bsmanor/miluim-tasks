@@ -23,7 +23,7 @@ export class SoldiersComponent implements OnInit {
     this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName, id: this.id});
   }
 
-  getSoldier(id) {
+  getSoldierById(id) {
     this.soldiersService.getSoldierById(id);
   }
 
