@@ -14,7 +14,7 @@ export class SoldiersService {
 
   get soldiers(): Observable<Soldier[]> {
     return this._soldiers;
-  }   
+  }
 
   constructor(private afs: AngularFirestore) {
     this.soldiersCollection = afs.collection<Soldier>('soldiers');

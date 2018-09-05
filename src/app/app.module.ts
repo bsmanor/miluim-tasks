@@ -12,12 +12,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-
+import { SoldiersComponent } from './soldiers/soldiers.component';
+import { MissionsComponent } from './missions/missions.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    SoldiersComponent,
+    MissionsComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,8 @@ import { HomeComponent } from './home/home.component';
     AngularFireStorageModule, // imports firebase/storage only needed for storage features
     AppRoutingModule,
     MaterialModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

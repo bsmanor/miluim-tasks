@@ -9,6 +9,7 @@ export interface Soldier {
     avaiableMissions?: Mission[];
     currentMission?: string;
     isPresent?: string;
+    phone?: string;
     battalionId?: string;
     squad?: string;
     platoon?: string;
