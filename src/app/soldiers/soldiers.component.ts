@@ -13,14 +13,30 @@ export class SoldiersComponent implements OnInit {
   firstName: string;
   lastName: string;
   id: string;
+  query: string;
   soldiers: Observable<Soldier[]>;
 
   constructor(private soldiersService: SoldiersService) {
     this.soldiers = soldiersService.soldiers;
   }
 
+  isValid(soldier: Soldier): boolean {
+    if (this.query === '' || this.query === null) {
+      return true;
+    } else {
+      if (soldier.firstName.includes(this.query) || soldier.lastName.includes(this.query) || soldier.id.includes(this.query)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
   createSoldier() {
     this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName, id: this.id});
+    this.firstName = '';
+    this.lastName = '';
+    this.id = '';
   }
 
   getSoldierById(id) {
