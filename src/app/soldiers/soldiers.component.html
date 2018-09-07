@@ -2,7 +2,7 @@
   <div>
     <mat-form-field appearance="standard">
       <mat-label>חיפוש</mat-label>
-      <input [(ngModel)]="query" matInput placeholder="חיפוש" (keyup)="getSoldier()">
+      <input [(ngModel)]="query" matInput placeholder="חיפוש" (keyup)="keyup()">
     </mat-form-field>
   </div>
 
@@ -23,12 +23,10 @@
   
   <ul *ngIf="soldiers">
     <li *ngFor="let soldier of soldiers | async">
-      <div *ngIf="isValid(soldier)">
         {{soldier.firstName}} {{soldier.lastName}}
         <button mat-button color="primary" (click)="deleteSoldier(soldier.id)">delete</button>
         <button mat-button color="accent" (click)="editSoldier()">edit</button>
         <button mat-button color="warn" (click)="saveSoldier()">save</button>
-      </div>
     </li>
   </ul>
 </div>

@@ -15,7 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { SoldiersComponent } from './soldiers/soldiers.component';
 import { MissionsComponent } from './missions/missions.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SoldierQueryDirective } from './soldier-query.directive';
+import { SoldierQueryDirective } from './directives/soldier-query.directive';
 @NgModule({
   declarations: [
     AppComponent,

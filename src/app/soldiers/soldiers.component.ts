@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SoldiersService } from '../../assets/services/soldiers.service';
+import { Soldier } from './../../assets/models/models';
 import { Observable } from 'rxjs';
-import { Soldier } from '../../assets/models/models';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-soldiers',
@@ -15,9 +17,20 @@ export class SoldiersComponent implements OnInit {
   id: string;
   query: string;
   soldiers: Observable<Soldier[]>;
+  num: number;
 
   constructor(private soldiersService: SoldiersService) {
     this.soldiers = soldiersService.soldiers;
+  }
+
+  keyup() {
+    this.soldiers = this.soldiers.pipe(filter(soldiers => {
+      for (let soldier of soldiers) {
+        if (soldier.firstName.includes(this.query)) {
+          return true;
+        }
+      }
+    }));
   }
 
   isValid(soldier: Soldier): boolean {
