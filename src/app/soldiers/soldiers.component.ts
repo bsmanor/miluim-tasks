@@ -16,21 +16,22 @@ export class SoldiersComponent implements OnInit {
   lastName: string;
   id: string;
   query: string;
-  soldiers: Observable<Soldier[]>;
+  // soldiers: Observable<Soldier[]>;
+  soldiers: Soldier[] = [];
+  soldiersToView: Soldier[] = [];
   num: number;
 
   constructor(private soldiersService: SoldiersService) {
-    this.soldiers = soldiersService.soldiers;
+    this.soldiersService.soldiers.subscribe(soldiers => {
+      for (let soldier of soldiers) {
+        this.soldiers.push(soldier);
+      }
+      this.soldiersToView = this.soldiers;
+    })
   }
 
   keyup() {
-    this.soldiers = this.soldiers.pipe(filter(soldiers => {
-      for (let soldier of soldiers) {
-        if (soldier.firstName.includes(this.query)) {
-          return true;
-        }
-      }
-    }));
+    this.soldiersToView = this.soldiers.filter(soldier => soldier.firstName.includes(this.query));
   }
 
   isValid(soldier: Soldier): boolean {

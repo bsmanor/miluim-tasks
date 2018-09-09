@@ -1,3 +1,8 @@
-<p>
-  login works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center center" style="height: 100%;">
+  <firebase-ui 
+    (signInSuccessWithAuthResult)="successCallback($event)"
+    (signInFailure)="errorCallback($event)">
+  </firebase-ui>
+  <button (click)="logout()">Logout</button>
+  <button [routerLink]="['/page']">To second page</button>
+</div>
