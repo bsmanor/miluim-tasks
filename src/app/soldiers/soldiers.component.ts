@@ -11,10 +11,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./soldiers.component.css']
 })
 export class SoldiersComponent implements OnInit {
-
-  firstName: string;
-  lastName: string;
-  id: string;
+  
   query: string;
   // soldiers: Observable<Soldier[]>;
   soldiers: Soldier[] = [];
@@ -30,8 +27,22 @@ export class SoldiersComponent implements OnInit {
     })
   }
 
+  updateSoldiersView() {
+    if(this.query === '' || this.query === null) {
+      this.soldiersToView = this.soldiers
+    } else {
+      this.soldiersToView = this.soldiers.filter(soldier => {
+        for (let prop in soldier ){
+          if (soldier[prop].includes(this.query)) {
+            return soldier
+          }
+        }
+      })
+    }
+  }
+
   keyup() {
-    this.soldiersToView = this.soldiers.filter(soldier => soldier.firstName.includes(this.query));
+    this.updateSoldiersView();
   }
 
   isValid(soldier: Soldier): boolean {
@@ -46,19 +57,13 @@ export class SoldiersComponent implements OnInit {
     }
   }
 
-  createSoldier() {
-    this.soldiersService.createSoldier({firstName: this.firstName, lastName: this.lastName, id: this.id});
-    this.firstName = '';
-    this.lastName = '';
-    this.id = '';
-  }
-
   getSoldierById(id) {
     this.soldiersService.getSoldierById(id);
   }
 
   deleteSoldier(id) {
     this.soldiersService.deleteSoldier(id);
+    this.updateSoldiersView();
   }
 
   ngOnInit() {

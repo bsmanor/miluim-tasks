@@ -6,7 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: '/home',  pathMatch: 'full' },
   { path: 'missions', component: MissionsComponent },
   { path: 'soldiers', component: SoldiersComponent },
   { path: 'login', component: LoginComponent },

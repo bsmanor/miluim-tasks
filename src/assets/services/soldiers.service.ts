@@ -21,7 +21,6 @@ export class SoldiersService {
     this._soldiers = this.soldiersCollection.valueChanges();
   }
 
-
   getSoldiers() {
     // next step is to create the get soldiers as an obserable instead of a function
     return this.soldiers;
@@ -34,6 +33,7 @@ export class SoldiersService {
 
   }
 
+  // needs to return a promise upon success or failure
   createSoldier(soldier: Soldier) {
     this.soldiersCollection.doc(soldier.id).set(soldier);
   }
@@ -44,8 +44,16 @@ export class SoldiersService {
     );
   }
 
+  // needs to return a promise upon success or failure
   deleteSoldier(id) {
-    this.soldiersCollection.doc(id).delete();
+    console.log('deletion process started');
+    
+    this.soldiersCollection.doc(id).delete().then(p => {
+      console.log('deletion cmpleted');
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
 }

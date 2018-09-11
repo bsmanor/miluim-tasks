@@ -1,4 +1,7 @@
+import { Soldier } from './../../assets/models/models';
+import { SoldiersService } from './../../assets/services/soldiers.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../assets/services/auth.service';
 import { Router } from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {FirebaseUISignInSuccessWithAuthResult} from 'firebaseui-angular';
@@ -10,20 +13,42 @@ import { FirebaseUISignInFailure } from '../../../node_modules/firebaseui-angula
 })
 export class LoginComponent implements OnInit {
 
+  isSignUp: boolean;
+
+  // form related
+    soldier: Soldier = {
+    firstName: '',
+    lastName: '',
+    id: '',
+    authId: '',
+    age: '',
+    rank: '',
+    title: '',
+    phone: '',
+    battalionId: '',
+    squad: '',
+    platoon: '',
+    team: ''
+  }
+
   constructor(
+    private soldiersService: SoldiersService,
     private afAuth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
-
-
-
   ngOnInit() {
     this.afAuth.authState.subscribe(d => {
       console.log(d)
       if (d.emailVerified) {
-        this.router.navigate(['/home']);
+        this.authService.user = d;
+        // this.router.navigate(['/soldiers']);
       }
     });
+  }
+
+  printForm(data) {
+    console.log(data);
   }
 
   logout() {
@@ -32,13 +57,15 @@ export class LoginComponent implements OnInit {
 
   successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
     console.log('successCallback', data);
-    this.router.navigate(['/soldiers']);
+    this.isSignUp = true;
   }
   
   errorCallback(data: FirebaseUISignInFailure) {
     console.warn('errorCallback', data);
-    this.router.navigate(['/home']);
-
   }
 
+  createSoldier() {
+    this.soldiersService.createSoldier(this.soldier);
+    this.router.navigate(['/home']);
+  }
 }

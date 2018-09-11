@@ -6,34 +6,22 @@
       <input [(ngModel)]="query" matInput placeholder="חיפוש" (keyup)="keyup()">
     </mat-form-field>
   </div>
-
-  <mat-form-field appearance="outline">
-    <input matInput placeholder="first name" [(ngModel)]="firstName">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <input matInput placeholder="last name" [(ngModel)]="lastName">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <input matInput placeholder="ID" [(ngModel)]="id">
-  </mat-form-field>
-  
-  <button mat-button color="primary" (click)="createSoldier()">ADD SOLDIER</button>
-  
-  <div *ngIf="soldiers" fxLayout="row" fxLayoutGap="20px" style="margin: 20px;">
-    <mat-card *ngFor="let soldier of soldiersToView" style="max-width: 400px;">
+    
+  <div *ngIf="soldiers" fxLayout="row wrap" fxLayoutAlign="space-around space-around">
+    <mat-card style="margin-bottom: 20px;" *ngFor="let soldier of soldiersToView">
       <mat-card-header>
         <mat-card-title>{{soldier.firstName}} {{soldier.lastName}}</mat-card-title>
         <mat-card-subtitle>{{soldier.id}}</mat-card-subtitle>
       </mat-card-header>
 
-      <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+      <img src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu" width="200px">
 
       <mat-card-content>
         <p>
         </p>
       </mat-card-content>
 
-      <mat-card-actions>
+      <mat-card-actions fxLayout="row" fxLayoutAlign="space-between">
         <button mat-button color="primary" (click)="deleteSoldier(soldier.id)"><mat-icon>delete</mat-icon></button>
         <button mat-button color="accent" (click)="editSoldier()"><mat-icon>edit</mat-icon></button>
       </mat-card-actions>

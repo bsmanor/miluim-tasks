@@ -1,8 +1,50 @@
 <div fxLayout="column" fxLayoutAlign="center center" style="height: 100%;">
-  <firebase-ui 
-    (signInSuccessWithAuthResult)="successCallback($event)"
-    (signInFailure)="errorCallback($event)">
-  </firebase-ui>
-  <button (click)="logout()">Logout</button>
-  <button [routerLink]="['/page']">To second page</button>
+    <ng-container *ngIf="!isSignUp; then firebaseUi; else form"></ng-container>
+    <ng-template #firebaseUi>
+      <firebase-ui 
+        (signInSuccessWithAuthResult)="successCallback($event)"
+        (signInFailure)="errorCallback($event)">
+      </firebase-ui>
+      <button (click)="logout()">Logout</button>
+    </ng-template>
+
+    <!-- form template -->
+    <ng-template #form>
+      <p style="font-size: 50px; letter-spacing: 3px;">כעת נותר רק למלא מספר פרטים אחרונים ואנחנו מוכנים!</p>
+      <form #formData fxLayout="row wrap" fxLayoutAlign="space-around">
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="שם פרטי" name="firstName" [(ngModel)]="soldier.firstName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="שם משפחה" name="lastName" [(ngModel)]="soldier.lastName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="דרגה" name="rank" [(ngModel)]="soldier.rank">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="תפקיד" name="title" [(ngModel)]="soldier.title">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="גיל" name="age" [(ngModel)]="soldier.age">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="טלפון" name="phone" [(ngModel)]="soldier.phone">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="גדוד" name="battalionId" [(ngModel)]="soldier.battalionId">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="סוללה" name="squad" [(ngModel)]="soldier.squad">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="פלגה" name="platoon" [(ngModel)]="soldier.platoon">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="צוות" name="team" [(ngModel)]="soldier.team">
+        </mat-form-field>
+      </form>
+
+      <button mat-button color="primary" (click)="createSoldier()">שמור</button>
+
+    </ng-template>
 </div>

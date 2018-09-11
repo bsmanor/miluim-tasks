@@ -1,5 +1,6 @@
 export interface Soldier {
     id?: string;
+    authId?: string;
     firstName?: string;
     lastName?: string;
     age?: string;
@@ -27,4 +28,9 @@ export interface Mission {
     plusComnd?: boolean;
     plusOfficer?: boolean;
     additionalNotes?: string;
+}
+
+export interface UserStatus {
+    isLoggedIn: boolean;
+    isEmailVerified: boolean;
 }
