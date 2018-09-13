@@ -35,7 +35,7 @@ export class SoldiersService {
 
   // needs to return a promise upon success or failure
   createSoldier(soldier: Soldier) {
-    this.soldiersCollection.doc(soldier.id).set(soldier);
+    this.soldiersCollection.doc(soldier.authId).set(soldier);
   }
 
   updateSoldier(id, param, value) {

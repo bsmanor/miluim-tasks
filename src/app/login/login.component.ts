@@ -14,21 +14,22 @@ import { FirebaseUISignInFailure } from '../../../node_modules/firebaseui-angula
 export class LoginComponent implements OnInit {
 
   isSignUp: boolean;
+  userUid: string;
 
   // form related
     soldier: Soldier = {
-    firstName: '',
-    lastName: '',
-    id: '',
-    authId: '',
-    age: '',
-    rank: '',
-    title: '',
-    phone: '',
-    battalionId: '',
-    squad: '',
-    platoon: '',
-    team: ''
+      firstName: '',
+      lastName: '',
+      id: '',
+      authId: '',
+      age: '',
+      rank: '',
+      title: '',
+      phone: '',
+      battalionId: '',
+      squad: '',
+      platoon: '',
+      team: ''
   }
 
   constructor(
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.afAuth.authState.subscribe(d => {
-      console.log(d)
+      console.log(d);
+      this.userUid = d.uid;
       if (d.emailVerified) {
         this.authService.user = d;
         // this.router.navigate(['/soldiers']);
@@ -65,6 +67,7 @@ export class LoginComponent implements OnInit {
   }
 
   createSoldier() {
+    this.soldier.authId = this.userUid;
     this.soldiersService.createSoldier(this.soldier);
     this.router.navigate(['/home']);
   }
